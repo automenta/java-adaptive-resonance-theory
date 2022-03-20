@@ -7,8 +7,7 @@ import com.github.chen0040.data.frame.DataQuery;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.frame.Sampler;
 import com.github.chen0040.data.image.ImageDataFrameFactory;
-import com.sun.scenario.effect.ImageData;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.testng.Assert.*;
 
 
 /**
@@ -112,14 +110,14 @@ public class FuzzyARTClusteringUnitTest {
       System.out.println(data.head(10));
 
       FuzzyARTClustering algorithm = new FuzzyARTClustering();
-      algorithm.setMaxClusterCount(2);
+      algorithm.maxClusterCount = 2;
 
       DataFrame learnedData = algorithm.fitAndTransform(data);
 
       for(int i = 0; i < learnedData.rowCount(); ++i){
          DataRow tuple = learnedData.row(i);
          String clusterId = tuple.getCategoricalTargetCell("cluster");
-         System.out.println("learned: " + clusterId +"\tknown: "+tuple.target());
+         System.out.println("cluster: " + clusterId +"\tknown: "+tuple.target());
       }
 
 

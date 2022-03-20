@@ -1,23 +1,14 @@
 package com.github.chen0040.art.clustering;
 
 
-import com.github.chen0040.art.core.ART1;
-import com.github.chen0040.art.utils.FileUtils;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataQuery;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.frame.Sampler;
-import com.github.chen0040.data.image.ImageDataFrameFactory;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Random;
-
-import static org.testng.Assert.*;
 
 
 /**
@@ -84,6 +75,7 @@ public class ART1ClusteringUnitTest {
          System.out.println("learned: " + clusterId +"\tknown: "+tuple.target());
       }
 
+      //TODO assert's
 
    }
 }

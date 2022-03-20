@@ -5,28 +5,26 @@ import com.github.chen0040.art.core.ARTMAP;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.utils.transforms.ComplementaryCoding;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+
 
 
 /**
  * Created by xschen on 23/8/15.
  */
-@Getter
-@Setter
+//@Getter
+//@Setter
 public class ARTMAPClassifier {
 
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private ARTMAP net;
 
-    private double alpha = 0.1; // choice parameter
-    private double rho0 = 0.1; // base resonance threshold
-    private double beta = 0.3; // learning rate
+    public double alpha = 0.1; // choice parameter
+    public double rho0 = 0.1; // base resonance threshold
+    public double beta = 0.3; // learning rate
 
     private ComplementaryCoding inputNormalization;
 
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private boolean allowNewNodeInPrediction = false;
 
     public String transform(DataRow tuple) {

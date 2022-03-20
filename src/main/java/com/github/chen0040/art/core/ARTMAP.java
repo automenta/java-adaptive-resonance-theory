@@ -20,31 +20,30 @@ public class ARTMAP extends FuzzyART {
         labels = new ArrayList<>();
     }
 
-    public ARTMAP(){
+    public ARTMAP() {
         super();
         labels = new ArrayList<>();
     }
 
 
-    public String simulate(double[] x, String label, boolean can_create_new_node){
+    public String simulate(double[] x, String label, boolean can_create_new_node) {
         boolean new_node = can_create_new_node;
         int C = getNodeCount();
 
         String winner = label;
 
-        if(label != null && !labels.contains(label)){
+        if (label != null && !labels.contains(label)) {
             addNode(x);
             labels.add(label);
-        }
-        else {
-            if(label == null){
+        } else {
+            if (label == null) {
                 can_create_new_node = false;
             }
 
             if (can_create_new_node) {
                 for (int j = 0; j < C; ++j) {
-                    double activation_value = choice_function(x, j);
-                    activation_values.set(j, activation_value);
+                    activation_values.set(j,
+                            choice_function(x, j));
                 }
 
                 for (int j = 0; j < C; ++j) {

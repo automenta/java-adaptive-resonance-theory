@@ -5,9 +5,8 @@ import com.github.chen0040.art.core.FuzzyART;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.utils.transforms.ComplementaryCoding;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import jdk.nashorn.internal.objects.annotations.Getter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,24 +15,24 @@ import java.util.Set;
 /**
  * Created by xschen on 21/8/15.
  */
-@Getter
-@Setter
+//@Getter
+//@Setter
 public class FuzzyARTClustering {
 
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private FuzzyART net;
 
-    @Setter(AccessLevel.NONE)
-    @Getter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
+    //@Getter(AccessLevel.NONE)
     private int initialNodeCount = 1;
-    @Setter(AccessLevel.NONE)
-    @Getter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
+    //@Getter(AccessLevel.NONE)
     private boolean allowNewNodeInPrediction = false;
 
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private ComplementaryCoding inputNormalization;
 
-    private int maxClusterCount = -1;
+    public int maxClusterCount = -1;
 
     private double alpha = 0.1;
     private double beta = 0.2;

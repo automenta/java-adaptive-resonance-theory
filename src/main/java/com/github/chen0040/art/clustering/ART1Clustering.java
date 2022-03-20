@@ -5,7 +5,7 @@ import com.github.chen0040.art.core.ART1;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.utils.transforms.Standardization;
-import lombok.Setter;
+import jdk.nashorn.internal.objects.annotations.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,18 +18,18 @@ public class ART1Clustering {
     private ART1 net;
     private int initialNodeCount = 1;
 
-    @Setter
+    
     private int maxClusterCount = -1;
 
-    @Setter
+    
     private boolean allowNewNodeInPrediction = false;
     private Standardization inputNormalization;
 
-    @Setter
+    
     private double alpha = 0.1; // choice parameter
-    @Setter
+    
     private double rho0 = 0.9; // base resonance threshold
-    @Setter
+    
     private double beta = 0.3; // learning rate
 
     private Set<Integer> clusterIds = new HashSet<>();
