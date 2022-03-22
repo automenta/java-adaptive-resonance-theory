@@ -1,6 +1,5 @@
 package com.github.chen0040.art.utils;
 
-import java.io.File;
 import java.io.InputStream;
 
 
@@ -10,7 +9,7 @@ import java.io.InputStream;
 public class FileUtils {
     public static InputStream getResource(String fileName) {
 
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
 
         //Get file from resources folder
         ClassLoader classLoader = FileUtils.class.getClassLoader();
