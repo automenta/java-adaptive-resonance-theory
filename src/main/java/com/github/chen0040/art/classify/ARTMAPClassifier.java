@@ -58,6 +58,6 @@ public class ARTMAPClassifier {
 
 
     public int nodeCount() {
-        return net.getNodeCount();
+        return net.nodeCount();
     }
 }

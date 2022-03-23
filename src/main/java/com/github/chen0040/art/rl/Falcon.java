@@ -15,7 +15,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class Falcon /* extends RLAgent */ {
     public ArrayList<FalconNode> nodes = new ArrayList<>();
-    public FalconConfig config;
+    public final FalconConfig config;
 
     protected Falcon(FalconConfig config) {
         this.config = config;
@@ -47,12 +47,11 @@ public class Falcon /* extends RLAgent */ {
 
     public static double clamp(double val, double minVal, double maxVal) {
         if (val < minVal) {
-            val = minVal;
+            return minVal;
         } else if (val > maxVal) {
-            val = maxVal;
-        }
-
-        return val;
+            return maxVal;
+        } else
+            return val;
     }
 
     public int learn(double[] inputs, int actionTaken, double[] rewards) {
@@ -114,8 +113,7 @@ public class Falcon /* extends RLAgent */ {
     }
 
     public int selectActionId(double[] inputs) {
-        QValueProvider provider = null;
-        return selectActionId(inputs, provider);
+        return selectActionId(inputs, (QValueProvider)null);
     }
 
     public int selectActionId(double[] inputs, Set<Integer> feasibleActions, QValueProvider maze) {
@@ -123,8 +121,7 @@ public class Falcon /* extends RLAgent */ {
     }
 
     public int selectActionId(double[] inputs, Set<Integer> feasibleActions) {
-        QValueProvider provider = null;
-        return selectActionId(inputs, feasibleActions, provider);
+        return selectActionId(inputs, feasibleActions, null);
     }
 
     private double[] searchAction(double[] inputs) {
@@ -140,7 +137,7 @@ public class Falcon /* extends RLAgent */ {
         return null;
     }
 
-    public int compete(double[] choiceValues) {
+    protected int compete(double[] choiceValues) {
         double maxChoiceValue = Double.NEGATIVE_INFINITY;
         int J = -1;
         for (int j = 0; j < choiceValues.length; ++j) {
@@ -182,7 +179,6 @@ public class Falcon /* extends RLAgent */ {
         int selectedAction = -1;
         double maxValue = Double.NEGATIVE_INFINITY;
         for (Integer actionId : feasibleActions) {
-
             if (actions[actionId] > maxValue) {
                 maxValue = actions[actionId];
                 selectedAction = actionId;
@@ -200,7 +196,6 @@ public class Falcon /* extends RLAgent */ {
         if (actions == null)
             return ThreadLocalRandom.current().nextInt(numAction);
 
-
         int selectedAction = -1;
         double maxValue = Double.NEGATIVE_INFINITY;
         for (int actionId = 0; actionId < numAction; ++actionId) {
@@ -213,7 +208,4 @@ public class Falcon /* extends RLAgent */ {
         return selectedAction;
     }
 
-    public FalconConfig getConfig() {
-        return config;
-    }
 }

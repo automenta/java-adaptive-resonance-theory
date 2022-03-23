@@ -10,7 +10,6 @@ import java.util.List;
 public class ARTMAP extends FuzzyART {
     private final List<String> labels;
     private double epsilon = 0.00001;
-
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
     }
@@ -25,10 +24,9 @@ public class ARTMAP extends FuzzyART {
         labels = new ArrayList<>();
     }
 
-
     public String simulate(double[] x, String label, boolean can_create_new_node) {
         boolean new_node = can_create_new_node;
-        int C = getNodeCount();
+        int C = nodeCount();
 
         String winner = label;
 
@@ -42,26 +40,26 @@ public class ARTMAP extends FuzzyART {
 
             if (can_create_new_node) {
                 for (int j = 0; j < C; ++j) {
-                    activation_values.set(j,
-                            choice_function(x, j));
+                    activation.set(j,
+                            choice(x, j));
                 }
 
                 for (int j = 0; j < C; ++j) {
-                    int J = template_with_max_activation_value();
+                    int J = templateActive();
                     if (J == -1) break;
 
                     String labelJ = labels.get(J);
                     if (!labelJ.equals(label)) {
-                        rho = match_function(x, J) + epsilon;
+                        rho = match(x, J) + epsilon;
                     }
 
-                    double match_value = match_function(x, J);
+                    double match_value = match(x, J);
                     if (match_value > rho) {
-                        update_node(x, J);
+                        updateNode(x, J);
                         new_node = false;
                         break;
                     } else {
-                        activation_values.set(J, 0.0);
+                        activation.set(J, 0.0);
                     }
                 }
 
@@ -73,7 +71,7 @@ public class ARTMAP extends FuzzyART {
                 double max_match_value = 0;
                 int J = -1;
                 for (int j = 0; j < C; ++j) {
-                    double match_value = match_function(x, j);
+                    double match_value = match(x, j);
                     if (max_match_value < match_value) {
                         max_match_value = match_value;
                         J = j;

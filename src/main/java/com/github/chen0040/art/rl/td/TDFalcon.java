@@ -1,6 +1,8 @@
 package com.github.chen0040.art.rl.td;
 
-import com.github.chen0040.art.rl.*;
+import com.github.chen0040.art.rl.Falcon;
+import com.github.chen0040.art.rl.FalconConfig;
+import com.github.chen0040.art.rl.FalconNode;
 import com.github.chen0040.art.rl.q.QValue;
 import com.github.chen0040.art.rl.q.QValueProvider;
 
@@ -39,8 +41,7 @@ public class TDFalcon extends Falcon {
 
     private int getRandomActionId(Set<Integer> feasibleActions){
         if(feasibleActions.isEmpty()) return -1;
-        List<Integer> actions = new ArrayList<>();
-        actions.addAll(feasibleActions);
+        List<Integer> actions = new ArrayList<>(feasibleActions);
         return actions.get(random.nextInt(actions.size()));
     }
 
@@ -239,7 +240,7 @@ public class TDFalcon extends Falcon {
                 FalconNode nodeJ = nodes.get(J);
 
                 double[] rewards = dummyRewards();
-                rewards = nodeJ.fuzzyAND(rewards, nodeJ.weight_rewards);
+                rewards = FalconNode.fuzzyAND(rewards, nodeJ.weight_rewards);
                 return readQ(rewards);
             }
             return config.initialQ;

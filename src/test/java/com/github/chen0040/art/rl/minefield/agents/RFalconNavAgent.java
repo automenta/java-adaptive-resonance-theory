@@ -1,8 +1,8 @@
 package com.github.chen0040.art.rl.minefield.agents;
 
 import com.github.chen0040.art.rl.FalconConfig;
-import com.github.chen0040.art.rl.r.RFalcon;
 import com.github.chen0040.art.rl.minefield.env.MineField;
+import com.github.chen0040.art.rl.r.RFalcon;
 
 import java.util.Set;
 

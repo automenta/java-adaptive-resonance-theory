@@ -648,7 +648,7 @@ public class MineFieldSimulatorGUI extends JFrame {
             p_field.doRefresh(mineField, pos, step);
 
             String message = simulator.getMessage();
-            if (message != null && !message.equals("")) {
+            if (message != null && !message.isEmpty()) {
                 label2.setText(message);
             }
 

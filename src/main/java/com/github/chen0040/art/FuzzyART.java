@@ -2,6 +2,8 @@ package com.github.chen0040.art;
 
 /**
  * Created by xschen on 21/8/15.
+ * see: https://github.com/ACIL-Group/NuART-Py/blob/master/nuart/clustering/fuzzy_art.py
+ *
  */
 public class FuzzyART extends ART1 {
     public FuzzyART(int inputCount, int initialNeuronCount) {
@@ -12,16 +14,17 @@ public class FuzzyART extends ART1 {
     }
 
     @Override
-    protected void update_node(double[] x, int j){
+    protected void updateNode(double[] x, int j){
         double[] W_j = weights.get(j);
 
         for(int i=0; i < x.length; ++i){
-            W_j[i] = (1 - beta) * W_j[i] + beta * Math.min(x[i], W_j[i]);
+            double Wji = W_j[i];
+            W_j[i] = (1 - beta) * Wji + beta * Math.min(x[i], Wji);
         }
     }
 
     @Override
-    protected double choice_function(double[] x, int j){
+    protected double choice(double[] x, int j){
         double[] W_j = weights.get(j);
         double sum = 0, sum2 = 0;
         for (int i = 0; i < x.length; ++i){
@@ -34,7 +37,7 @@ public class FuzzyART extends ART1 {
     }
 
     @Override
-    protected double match_function(double[] x, int j){
+    protected double match(double[] x, int j){
         double[] W_j = weights.get(j);
         double sum = 0, sum2 = 0;
         for (int i = 0; i < x.length; ++i){

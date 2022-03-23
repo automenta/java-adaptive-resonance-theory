@@ -9,6 +9,8 @@ import com.github.chen0040.art.rl.minefield.env.MineField;
 import com.github.chen0040.art.rl.minefield.utils.SimulatorReport;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
@@ -141,7 +143,7 @@ public abstract class MineFieldSimulator {
             String json = JSON.toJSONString(rpt, SerializerFeature.BrowserCompatible);
 
             try {
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filepath)));
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(filepath))));
                 writer.write(json);
                 writer.flush();
                 writer.close();

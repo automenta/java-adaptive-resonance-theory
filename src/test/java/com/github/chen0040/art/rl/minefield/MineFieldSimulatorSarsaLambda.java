@@ -1,9 +1,9 @@
 package com.github.chen0040.art.rl.minefield;
 
 import com.github.chen0040.art.rl.FalconConfig;
-import com.github.chen0040.art.rl.td.TDMethod;
 import com.github.chen0040.art.rl.minefield.agents.FalconNavAgent;
 import com.github.chen0040.art.rl.minefield.agents.TDFalconNavAgent;
+import com.github.chen0040.art.rl.td.TDMethod;
 
 /**
  * Created by chen0469 on 10/1/2015 0001.

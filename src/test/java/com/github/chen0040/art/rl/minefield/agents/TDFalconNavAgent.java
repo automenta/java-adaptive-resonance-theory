@@ -1,6 +1,6 @@
 package com.github.chen0040.art.rl.minefield.agents;
 
-import com.github.chen0040.art.rl.*;
+import com.github.chen0040.art.rl.FalconConfig;
 import com.github.chen0040.art.rl.minefield.env.MineField;
 import com.github.chen0040.art.rl.q.QValue;
 import com.github.chen0040.art.rl.q.QValueProvider;
@@ -80,7 +80,7 @@ public class TDFalconNavAgent extends FalconNavAgent {
     }
 
     public void enableEligibilityTrace(){
-        this.ai = new TDLambdaFalcon(ai.getConfig(), ai.method);
+        this.ai = new TDLambdaFalcon(ai.config, ai.method);
     }
 
 }

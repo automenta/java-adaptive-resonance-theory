@@ -30,15 +30,16 @@ public class RFalcon extends Falcon {
 
     @Override
     protected void onNewNode(FalconNode node){
-        int numCode = nodes.size();
+        int n = nodes.size();
 
-        double[] new_confidence = new double[numCode];
-        for (int j=0; j < numCode-1; j++)
-            new_confidence[j] = confidence[j];
-        new_confidence[numCode-1] = initConfidence;
-        confidence = new_confidence;
+        double[] old_confidence = this.confidence;
+        double[] new_confidence = new double[n];
+        for (int j=0; j < n-1; j++)
+            new_confidence[j] = old_confidence[j]; //TODO j+-1 on one of these indices?
+        new_confidence[n-1] = initConfidence;
+        this.confidence = new_confidence;
 
-        J = numCode-1;
+        J = n-1;
     }
 
     @Override

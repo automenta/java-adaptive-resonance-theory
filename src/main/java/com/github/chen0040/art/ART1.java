@@ -6,27 +6,34 @@ import java.util.List;
 
 public class ART1 {
 
-    protected double alpha; // choice parameter
-    protected double rho; // resonance threshold
-    protected double beta; // learning rate
+    /** choice parameter */
+    protected double alpha;
+
+    /** base resonance threshold */
+    protected double rho;
+
+    /** learning rate */
+    protected double beta;
+
     protected List<double[]> weights;
-    protected List<Double> activation_values;
+
+    /** activation values */
+    protected List<Double> activation;
+
     protected int inputCount;
 
-
     public ART1() {
-        weights = new ArrayList<>();
-        activation_values = new ArrayList<>();
+        this(0, 0);
     }
 
     public ART1(int inputCount, int initialNeuronCount) {
         this.inputCount = inputCount;
-        weights = new ArrayList<>();
-        activation_values = new ArrayList<>();
 
-        for (int i = 0; i < initialNeuronCount; ++i) {
+        weights = new ArrayList<>(/*?*/);
+        activation = new ArrayList<>(/*?*/);
+
+        for (int i = 0; i < initialNeuronCount; ++i)
             addNode();
-        }
     }
 
     public void setAlpha(double alpha) {
@@ -44,19 +51,18 @@ public class ART1 {
     public void addNode() {
         double[] neuron = new double[inputCount];
         Arrays.fill(neuron, 1);
-        weights.add(neuron);
-        activation_values.add(0.0);
+        addNodeDirect(neuron);
     }
-
     public void addNode(double[] x) {
-        weights.add(
-            //x
-            x.clone()
-        );
-        activation_values.add(0.0);
+        addNodeDirect(x.clone());
     }
 
-    protected double choice_function(double[] x, int j) {
+    public final void addNodeDirect(double[] x) {
+        weights.add(x);
+        activation.add(0.0);
+    }
+
+    protected double choice(double[] x, int j) {
         double[] W_j = weights.get(j);
         double sum = 0, sum2 = 0;
         for (int i = 0; i < x.length; ++i) {
@@ -67,27 +73,28 @@ public class ART1 {
         return sum / (alpha + sum2);
     }
 
-    protected int template_with_max_activation_value() {
-        int C = getNodeCount();
-        double max_activation_value = Double.NEGATIVE_INFINITY;
-        int template_selected = -1;
+    /** template with max activation */
+    protected int templateActive() {
+        int C = nodeCount();
+        double vMax = Double.NEGATIVE_INFINITY;
+        int t = -1;
         for (int i = 0; i < C; ++i) {
-            double activation_value = activation_values.get(i);
-            if (activation_value > max_activation_value) {
-                max_activation_value = activation_value;
-                template_selected = i;
+            double v = activation.get(i);
+            if (v > vMax) {
+                vMax = v;
+                t = i;
             }
         }
-        return template_selected;
+        return t;
     }
 
-    public int getNodeCount() {
+    public int nodeCount() {
         return weights.size();
     }
 
-    protected double match_function(double[] x, int j) {
-        double[] W_j = weights.get(j);
+    protected double match(double[] x, int j) {
         double sum = 0, sum2 = 0;
+        double[] W_j = weights.get(j);
         for (int i = 0; i < x.length; ++i) {
             double Xi = x[i];
             sum += Math.abs(Xi * W_j[i]); // norm1
@@ -96,7 +103,7 @@ public class ART1 {
         return sum / sum2;
     }
 
-    protected void update_node(double[] x, int j) {
+    protected void updateNode(double[] x, int j) {
         double[] W_j = weights.get(j);
         for (int i = 0; i < x.length; ++i) {
             double Wji = W_j[i];
@@ -106,40 +113,40 @@ public class ART1 {
 
     public int simulate(double[] x, boolean can_create_new_node) {
         boolean new_node = can_create_new_node;
-        int C = getNodeCount();
+        int C = nodeCount();
 
         int winner = -1;
 
         if (can_create_new_node) {
             for (int i = 0; i < C; ++i) {
-                activation_values.set(i,
-                    choice_function(x, i));
+                activation.set(i,
+                    choice(x, i));
             }
 
             for (int i = 0; i < C; ++i) {
-                int J = template_with_max_activation_value();
+                int J = templateActive();
                 if (J == -1) break;
 
-                double match_value = match_function(x, J);
+                double match_value = match(x, J);
                 if (match_value > rho) {
-                    update_node(x, J);
+                    updateNode(x, J);
                     winner = J;
                     new_node = false;
                     break;
                 } else {
-                    activation_values.set(J, 0.0);
+                    activation.set(J, 0.0);
                 }
             }
 
             if (new_node) {
                 addNode(x);
-                winner = getNodeCount() - 1;
+                winner = nodeCount() - 1;
             }
         } else {
             double max_match_value = Double.NEGATIVE_INFINITY;
             int J = -1;
             for (int j = 0; j < C; ++j) {
-                double match_value = match_function(x, j);
+                double match_value = match(x, j);
                 if (max_match_value < match_value) {
                     max_match_value = match_value;
                     J = j;

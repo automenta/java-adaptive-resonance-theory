@@ -1,6 +1,9 @@
 package com.github.chen0040.art.rl.td;
 
-import com.github.chen0040.art.rl.*;
+import com.github.chen0040.art.rl.Falcon;
+import com.github.chen0040.art.rl.FalconConfig;
+import com.github.chen0040.art.rl.FalconNode;
+import com.github.chen0040.art.rl.Tuple2;
 import com.github.chen0040.art.rl.q.QValue;
 import com.github.chen0040.art.rl.q.QValueProvider;
 

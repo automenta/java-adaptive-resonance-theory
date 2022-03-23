@@ -25,8 +25,8 @@ public class FalconNode {
         return choiceValue_inputs * config.gamma_inputs + choiceValue_actions * config.gamma_actions + choiceValue_rewards * config.gamma_rewards;
     }
 
-    public static double computeChoiceValue(double[] x, double[] weights, double alpha, FalconConfigType choiceFunctionType) {
-        if (choiceFunctionType == FalconConfigType.FuzzyART) {
+    public static double computeChoiceValue(double[] x, double[] weights, double alpha, FalconConfig.FalconConfigType choiceFunctionType) {
+        if (choiceFunctionType == FalconConfig.FalconConfigType.FuzzyART) {
             return norm(fuzzyAND(x, weights)) / (alpha + norm(weights));
         } else {
             return norm(arrayTimes(x, weights)) / x.length;
@@ -94,10 +94,10 @@ public class FalconNode {
         updateWeights(rewards, weight_rewards, config.beta_rewards, config.artType);
     }
 
-    public static void updateWeights(double[] x, double[] weights, double beta, FalconConfigType artType) {
+    public static void updateWeights(double[] x, double[] weights, double beta, FalconConfig.FalconConfigType artType) {
         int len = x.length;
 
-        if (artType == FalconConfigType.FuzzyART) {
+        if (artType == FalconConfig.FalconConfigType.FuzzyART) {
             double[] x_fuzzyAND_weights = fuzzyAND(x, weights);
             for (int i = 0; i < len; ++i) {
                 weights[i] = (1 - beta) * weights[i] + beta * x_fuzzyAND_weights[i];

@@ -24,12 +24,15 @@ public class ART1Clustering {
     private final boolean allowNewNodeInPrediction = false;
     private Standardization inputNormalization;
 
-    
-    private final double alpha = 0.1; // choice parameter
-    
-    private final double rho0 = 0.9; // base resonance threshold
-    
-    private final double beta = 0.3; // learning rate
+
+    /** choice parameter */
+    private final double alpha = 0.1;
+
+    /** base resonance threshold */
+    private final double rho0 = 0.9;
+
+    /** learning rate */
+    private final double beta = 0.3;
 
     private final Set<Integer> clusterIds = new HashSet<>();
 
