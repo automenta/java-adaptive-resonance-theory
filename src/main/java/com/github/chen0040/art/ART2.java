@@ -5,29 +5,35 @@ import java.util.List;
 
 /**
  * PtrMan's try of implementation of ART-2
- *
+ * <p>
  * translated from:
  * https://gist.github.com/PtrMan/18e467c8f3158017815beba1b319588c
- *
+ * <p>
  * DONE< implement T2->T1 weights and proper voting! >
- *    DONE< add bottom up weights >
- *    DONE< implement proper voting >
- *    DONE< implement proper bottom up voting! >
- *        DONE< apply value of prototype when a valid prototype was selected! >
- *        DONE< adapt bottom-up weights! >
+ * DONE< add bottom up weights >
+ * DONE< implement proper voting >
+ * DONE< implement proper bottom up voting! >
+ * DONE< apply value of prototype when a valid prototype was selected! >
+ * DONE< adapt bottom-up weights! >
  * DONE< implement reset!!! >
  */
 public class ART2 {
 
-    public double a = 2; //10.0; // parameter
-    public double b= 1.2; // parameter
-    public double c= 0.1; // parameter // 0.1
-    public double d= 0.8; // parameter 0.0 < d < 1.0 // is some kind of learning rate
+    public double a = 2; //10.0;
+    public double b = 1.2;
+    public double c = 0.1;
+
+    /** some kind of learning rate: 0 < d < 1 */
+    public double d = 0.8;
 
 
-    public double e = 0.01; // parameter
-    public double sigma = 0.0; // parameter, used for noise surpression
-    public double vigilance = 1.0; // parameter in range 0.0 < x < 1.0
+    public double e = 0.01;
+
+    /** parameter for noise suppression */
+    public double sigma = 0.0;
+
+    /** in range 0 < x < 1 */
+    public double vigilance = 1;
 
     public int vecWidth = 5; // width of vector
 
@@ -35,13 +41,15 @@ public class ART2 {
 
     public List<ArtPrototype> prototypes = new ArrayList<>();
 
-    public int M = 10; // number of prototypes
+    /** number of prototypes */
+    public int M;
 
     public boolean enLearning = true; // enable learning? - is useful to toggle to pure classification
-/*
 
 
-    public function init() {
+    public ART2(int M) {
+        this.M = M;
+        /*
         { // check the ratio between c and d
             var ratio: Float = (c*d) / (1.0-d);
             trace('ratio=$ratio');
@@ -75,8 +83,12 @@ public class ART2 {
             prototypes.push(createdPrototype);
         }
     }
+    */
+    }
 
-    public function calc(I: Array<Float>): Int {
+    public int calc(double[] i) {
+        throw new UnsupportedOperationException("TODO");
+        /*
         // reset surpression by reset
         for(iPrototype in prototypes) {
             iPrototype.isSurpressed = false;
@@ -219,9 +231,12 @@ public class ART2 {
         }
 
         return selIdx; // we return the classification
+        */
     }
 
-    public function applyF(x: Array<Float>): Array<Float> {
+    public double[] applyF(double[] x) {
+        throw new UnsupportedOperationException("TODO");
+    /*
         var res = [];
         for (ix in x) {
             var v = ix;
@@ -233,6 +248,10 @@ public class ART2 {
         return res;
     }
 
+    */
+    }
+
+    /*
     public static function vecScale(a: Array<Float>, s: Float): Array<Float> {
         var res: Array<Float> = [];
         for (iv in a) {
@@ -289,10 +308,14 @@ public class ART2 {
     static class ArtPrototype {
         public double[] v;
 
-        /** bottom up weights F1->F2 */
+        /**
+         * bottom up weights F1 -> F2
+         */
         public double[] zBottomUp;
 
-        /** is it currently surpressed by reset? */
+        /**
+         * is it currently surpressed by reset?
+         */
         public boolean isSurpressed = false;
 
         public ArtPrototype(double[] v) {
