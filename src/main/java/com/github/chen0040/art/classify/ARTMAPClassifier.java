@@ -13,10 +13,10 @@ import com.github.chen0040.data.utils.transforms.ComplementaryCoding;
  */
 //@Getter
 //@Setter
-public class ARTMAPClassifier {
+public class ARTMAPClassifier<Y> {
 
     //@Setter(AccessLevel.NONE)
-    private ARTMAP net;
+    private ARTMAP<Y> net;
 
     public double alpha = 0.1; // choice parameter
     public double rho0 = 0.1; // base resonance threshold
@@ -27,11 +27,11 @@ public class ARTMAPClassifier {
     //@Setter(AccessLevel.NONE)
     private final boolean allowNewNodeInPrediction = false;
 
-    public String transform(DataRow tuple) {
-        return simulate(tuple, false);
+    public Y apply(DataRow tuple) {
+        return put(tuple, false);
     }
 
-    public void fit(DataFrame batch) {
+    @Deprecated public void put(DataFrame batch) {
 
 
         inputNormalization = new ComplementaryCoding(batch);
@@ -44,18 +44,20 @@ public class ARTMAPClassifier {
 
         int m = batch.rowCount();
         for(int i=0; i < m; ++i) {
-            DataRow tuple = batch.row(i);
-            simulate(tuple, true);
+            put(batch.row(i), true);
         }
 
     }
 
-    public String simulate(DataRow tuple, boolean can_create_node){
+    @Deprecated public Y put(DataRow tuple, boolean can_create_node){
         double[] x = tuple.toArray();
-        x = inputNormalization.normalize(x);
-        return net.simulate(x, tuple.categoricalTarget(), can_create_node);
+        String y = tuple.categoricalTarget();
+        return put(x, (Y) y, can_create_node);
     }
 
+    public Y put(double[] x, Y y, boolean can_create_node) {
+        return net.put(inputNormalization.normalize(x), y, can_create_node);
+    }
 
     public int nodeCount() {
         return net.nodeCount();

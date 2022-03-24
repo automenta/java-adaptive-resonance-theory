@@ -7,8 +7,8 @@ import java.util.List;
 /**
  * Created by xschen on 23/8/15.
  */
-public class ARTMAP extends FuzzyART {
-    private final List<String> labels;
+public class ARTMAP<Y> extends FuzzyART {
+    private final List<Y> labels;
     private double epsilon = 0.00001;
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
@@ -24,17 +24,17 @@ public class ARTMAP extends FuzzyART {
         labels = new ArrayList<>();
     }
 
-    public String simulate(double[] x, String label, boolean can_create_new_node) {
+    public Y put(double[] x, Y y, boolean can_create_new_node) {
         boolean new_node = can_create_new_node;
         int C = nodeCount();
 
-        String winner = label;
+        Y winner = y;
 
-        if (label != null && !labels.contains(label)) {
+        if (y != null && !labels.contains(y)) {
             addNode(x);
-            labels.add(label);
+            labels.add(y);
         } else {
-            if (label == null) {
+            if (y == null) {
                 can_create_new_node = false;
             }
 
@@ -48,8 +48,8 @@ public class ARTMAP extends FuzzyART {
                     int J = templateActive();
                     if (J == -1) break;
 
-                    String labelJ = labels.get(J);
-                    if (!labelJ.equals(label)) {
+                    Y labelJ = labels.get(J);
+                    if (!labelJ.equals(y)) {
                         rho = match(x, J) + epsilon;
                     }
 
@@ -65,7 +65,7 @@ public class ARTMAP extends FuzzyART {
 
                 if (new_node) {
                     addNode(x);
-                    labels.add(label);
+                    labels.add(y);
                 }
             } else {
                 double max_match_value = 0;
