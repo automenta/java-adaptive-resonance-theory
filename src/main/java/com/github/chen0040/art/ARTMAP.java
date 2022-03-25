@@ -41,7 +41,7 @@ public class ARTMAP<Y> extends FuzzyART {
             if (can_create_new_node) {
                 for (int j = 0; j < C; ++j) {
                     activation.set(j,
-                            choice(x, j));
+                            choose(x, j));
                 }
 
                 for (int j = 0; j < C; ++j) {

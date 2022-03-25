@@ -24,7 +24,7 @@ public class FuzzyART extends ART1 {
     }
 
     @Override
-    protected double choice(double[] x, int j){
+    protected double choose(double[] x, int j){
         double[] W_j = weights.get(j);
         double sum = 0, sum2 = 0;
         for (int i = 0; i < x.length; ++i){

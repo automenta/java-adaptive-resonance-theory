@@ -62,15 +62,16 @@ public class ART1 {
         activation.add(0.0);
     }
 
-    protected double choice(double[] x, int j) {
-        double[] W_j = weights.get(j);
-        double sum = 0, sum2 = 0;
+    /** choice function */
+    protected double choose(double[] x, int j) {
+        double[] Wj = weights.get(j);
+        double a = 0, b = 0;
         for (int i = 0; i < x.length; ++i) {
-            double Wji = W_j[i];
-            sum += Math.abs(x[i] * Wji); // norm1
-            sum2 += Math.abs(Wji); //  norm1
+            double Wji = Wj[i];
+            a += Math.abs(x[i] * Wji); // norm1
+            b += Math.abs(Wji); //  norm1
         }
-        return sum / (alpha + sum2);
+        return a / (alpha + b);
     }
 
     /** template with max activation */
@@ -93,14 +94,14 @@ public class ART1 {
     }
 
     protected double match(double[] x, int j) {
-        double sum = 0, sum2 = 0;
+        double a = 0, b = 0;
         double[] W_j = weights.get(j);
         for (int i = 0; i < x.length; ++i) {
             double Xi = x[i];
-            sum += Math.abs(Xi * W_j[i]); // norm1
-            sum2 += Math.abs(Xi); //  norm1
+            a += Math.abs(Xi * W_j[i]); // norm1
+            b += Math.abs(Xi); //  norm1
         }
-        return sum / sum2;
+        return a / b;
     }
 
     protected void updateNode(double[] x, int j) {
@@ -112,49 +113,52 @@ public class ART1 {
     }
 
     public int simulate(double[] x, boolean can_create_new_node) {
-        boolean new_node = can_create_new_node;
         int C = nodeCount();
+        return can_create_new_node ?
+                simulateNew(x, C) :
+                simulateExisting(x, C);
+    }
+
+    private int simulateExisting(double[] x, int n) {
+        double winnerValue = Double.NEGATIVE_INFINITY;
+        int winner = -1;
+        for (int j = 0; j < n; ++j) {
+            double value = match(x, j);
+            if (winnerValue < value) {
+                winnerValue = value;
+                winner = j;
+            }
+        }
+        return winner;
+    }
+
+    private int simulateNew(double[] x, int n) {
+        for (int i = 0; i < n; ++i)
+            activation.set(i, choose(x, i));
 
         int winner = -1;
+        boolean new_node = true;
+        for (int i = 0; i < n; ++i) {
+            int J = templateActive();
+            if (J == -1) break;
 
-        if (can_create_new_node) {
-            for (int i = 0; i < C; ++i) {
-                activation.set(i,
-                    choice(x, i));
-            }
+            double match_value = match(x, J);
 
-            for (int i = 0; i < C; ++i) {
-                int J = templateActive();
-                if (J == -1) break;
-
-                double match_value = match(x, J);
-                if (match_value > rho) {
-                    updateNode(x, J);
-                    winner = J;
-                    new_node = false;
-                    break;
-                } else {
-                    activation.set(J, 0.0);
-                }
+            //TODO if multiple == rho, random choose (rare)
+            if (match_value > rho) {
+                updateNode(x, J);
+                winner = J;
+                new_node = false;
+                break;
+            } else {
+                activation.set(J, 0.0);
             }
-
-            if (new_node) {
-                addNode(x);
-                winner = nodeCount() - 1;
-            }
-        } else {
-            double max_match_value = Double.NEGATIVE_INFINITY;
-            int J = -1;
-            for (int j = 0; j < C; ++j) {
-                double match_value = match(x, j);
-                if (max_match_value < match_value) {
-                    max_match_value = match_value;
-                    J = j;
-                }
-            }
-            winner = J;
         }
 
+        if (new_node) {
+            addNode(x);
+            winner = nodeCount() - 1;
+        }
         return winner;
     }
 }
