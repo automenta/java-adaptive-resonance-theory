@@ -16,6 +16,8 @@ import java.util.List;
  * DONE< apply value of prototype when a valid prototype was selected! >
  * DONE< adapt bottom-up weights! >
  * DONE< implement reset!!! >
+ *
+ * see: https://colab.research.google.com/drive/17kjLbN8dhQpsA6Q6CEr2b6kSHP5rosfH
  */
 public class ART2 {
 

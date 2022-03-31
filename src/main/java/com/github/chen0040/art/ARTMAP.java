@@ -16,35 +16,25 @@ public class ARTMAP<Y> extends FuzzyART {
 
     public ARTMAP(int inputCount) {
         super(inputCount, 0);
-        labels = new ArrayList<>();
+        labels = new ArrayList<>(inputCount);
     }
 
     public ARTMAP() {
-        super();
-        labels = new ArrayList<>();
+        this(0);
     }
 
     public Y put(double[] x, Y y, boolean can_create_new_node) {
-        boolean new_node = can_create_new_node;
         int C = nodeCount();
 
-        Y winner = y;
 
         if (y != null && !labels.contains(y)) {
-            addNode(x);
-            labels.add(y);
+            addNode(x, y);
         } else {
-            if (y == null) {
-                can_create_new_node = false;
-            }
+            if (y!=null && can_create_new_node) {
+                boolean new_node = true;
+                chooseActivation(x, C);
 
-            if (can_create_new_node) {
-                for (int j = 0; j < C; ++j) {
-                    activation.set(j,
-                            choose(x, j));
-                }
-
-                for (int j = 0; j < C; ++j) {
+                for (int j = 0; j < C; j++) {
                     int J = templateActive();
                     if (J == -1) break;
 
@@ -63,11 +53,11 @@ public class ARTMAP<Y> extends FuzzyART {
                     }
                 }
 
-                if (new_node) {
-                    addNode(x);
-                    labels.add(y);
-                }
+                if (new_node)
+                    addNode(x, y);
+
             } else {
+                Y winner = y;
                 double max_match_value = 0;
                 int J = -1;
                 for (int j = 0; j < C; ++j) {
@@ -77,10 +67,20 @@ public class ARTMAP<Y> extends FuzzyART {
                         J = j;
                     }
                 }
-                winner = labels.get(J);
+                return labels.get(J);
             }
         }
 
-        return winner;
+        return y;
+    }
+
+    private void addNode(double[] x, Y y) {
+        addNode(x);
+        labels.add(y);
+    }
+
+    private void chooseActivation(double[] x, int C) {
+        for (int j = 0; j < C; j++)
+            activation.set(j, choose(x, j));
     }
 }

@@ -11,11 +11,8 @@ import com.github.chen0040.data.utils.transforms.ComplementaryCoding;
 /**
  * Created by xschen on 23/8/15.
  */
-//@Getter
-//@Setter
 public class ARTMAPClassifier<Y> {
 
-    //@Setter(AccessLevel.NONE)
     private ARTMAP<Y> net;
 
     public double alpha = 0.1; // choice parameter

@@ -6,11 +6,13 @@ package com.github.chen0040.art;
  *
  */
 public class FuzzyART extends ART1 {
+
     public FuzzyART(int inputCount, int initialNeuronCount) {
         super(inputCount, initialNeuronCount);
     }
+
     public FuzzyART(){
-        super();
+        this(0,0);
     }
 
     @Override

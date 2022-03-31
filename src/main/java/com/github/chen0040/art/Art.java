@@ -10,7 +10,7 @@ import java.util.Collections;
  *
  * TODO is this ART1 or ART2?
  */
-public class Art {
+class Art {
 
     private static final double RO = 0.9;
     private static final double ALPHA = 0.1;
