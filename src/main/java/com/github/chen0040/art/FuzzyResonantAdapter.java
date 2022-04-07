@@ -5,13 +5,13 @@ package com.github.chen0040.art;
  * see: https://github.com/ACIL-Group/NuART-Py/blob/master/nuart/clustering/fuzzy_art.py
  *
  */
-public class FuzzyART extends ART1 {
+public class FuzzyResonantAdapter extends ResonantAdapter1 {
 
-    public FuzzyART(int inputCount, int initialNeuronCount) {
+    public FuzzyResonantAdapter(int inputCount, int initialNeuronCount) {
         super(inputCount, initialNeuronCount);
     }
 
-    public FuzzyART(){
+    public FuzzyResonantAdapter(){
         this(0,0);
     }
 

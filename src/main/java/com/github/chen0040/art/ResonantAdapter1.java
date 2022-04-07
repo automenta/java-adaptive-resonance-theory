@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ART1 {
+public class ResonantAdapter1 {
 
     /** choice parameter */
     protected double alpha;
@@ -22,11 +22,11 @@ public class ART1 {
 
     protected int inputCount;
 
-    public ART1() {
+    public ResonantAdapter1() {
         this(0, 0);
     }
 
-    public ART1(int inputCount, int initialNeuronCount) {
+    public ResonantAdapter1(int inputCount, int initialNeuronCount) {
         this.inputCount = inputCount;
 
         weights = new ArrayList<>(/*?*/);

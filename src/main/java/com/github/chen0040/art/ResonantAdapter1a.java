@@ -10,7 +10,7 @@ import java.util.Collections;
  *
  * TODO is this ART1 or ART2?
  */
-class Art {
+class ResonantAdapter1a {
 
     private static final double RO = 0.9;
     private static final double ALPHA = 0.1;
@@ -22,7 +22,7 @@ class Art {
     private final ArrayList<DoubleIntPair> choiceVector;
 
 
-    public Art(int vSize) {
+    public ResonantAdapter1a(int vSize) {
         vectorSize = vSize;
         noCategories = 0;
         weight = new ArrayList<>();

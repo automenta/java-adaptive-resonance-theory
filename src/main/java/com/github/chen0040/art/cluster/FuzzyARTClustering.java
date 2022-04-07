@@ -1,7 +1,7 @@
 package com.github.chen0040.art.cluster;
 
 
-import com.github.chen0040.art.FuzzyART;
+import com.github.chen0040.art.FuzzyResonantAdapter;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.utils.transforms.ComplementaryCoding;
@@ -18,7 +18,7 @@ import java.util.Set;
 public class FuzzyARTClustering {
 
     //@Setter(AccessLevel.NONE)
-    private FuzzyART net;
+    private FuzzyResonantAdapter net;
 
     //@Setter(AccessLevel.NONE)
     //@Getter(AccessLevel.NONE)
@@ -66,7 +66,7 @@ public class FuzzyARTClustering {
         inputNormalization = new ComplementaryCoding(batch);
         int dimension = batch.row(0).toArray().length * 2; // times 2 due to complementary coding
 
-        net=new FuzzyART(dimension, initialNodeCount);
+        net=new FuzzyResonantAdapter(dimension, initialNodeCount);
         net.setAlpha(alpha);
         net.setBeta(beta);
         net.setRho(rho);

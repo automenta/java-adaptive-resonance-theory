@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * ART2a by Ptrman ?
  */
-public class ART2a {
+public class ResonantAdapter2a {
     /**
      * Count score (similarity) how similar inst and prot are.
      * The output (similarity) will be their dot product

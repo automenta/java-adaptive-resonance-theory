@@ -19,7 +19,7 @@ import java.util.List;
  *
  * see: https://colab.research.google.com/drive/17kjLbN8dhQpsA6Q6CEr2b6kSHP5rosfH
  */
-public class ART2 {
+public class ResonantAdapter2 {
 
     public double a = 2; //10.0;
     public double b = 1.2;
@@ -49,7 +49,7 @@ public class ART2 {
     public boolean enLearning = true; // enable learning? - is useful to toggle to pure classification
 
 
-    public ART2(int M) {
+    public ResonantAdapter2(int M) {
         this.M = M;
         /*
         { // check the ratio between c and d

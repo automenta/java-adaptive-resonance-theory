@@ -1,8 +1,6 @@
 # java-adaptive-resonance-theory
 Package provides java implementation of algorithms in the field of adaptive resonance theory (ART) 
 
-[![Build Status](https://travis-ci.org/chen0040/java-adaptive-resonance-theory.svg?branch=master)](https://travis-ci.org/chen0040/java-adaptive-resonance-theory) [![Coverage Status](https://coveralls.io/repos/github/chen0040/java-adaptive-resonance-theory/badge.svg?branch=master)](https://coveralls.io/github/chen0040/java-adaptive-resonance-theory?branch=master) 
-
 # Install
 
 Add the following dependency to your POM file:

@@ -7,19 +7,19 @@ import java.util.List;
 /**
  * Created by xschen on 23/8/15.
  */
-public class ARTMAP<Y> extends FuzzyART {
+public class ResonantMap<Y> extends FuzzyResonantAdapter {
     private final List<Y> labels;
     private double epsilon = 0.00001;
     public void setEpsilon(double epsilon) {
         this.epsilon = epsilon;
     }
 
-    public ARTMAP(int inputCount) {
+    public ResonantMap(int inputCount) {
         super(inputCount, 0);
         labels = new ArrayList<>(inputCount);
     }
 
-    public ARTMAP() {
+    public ResonantMap() {
         this(0);
     }
 

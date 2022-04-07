@@ -1,7 +1,7 @@
 package com.github.chen0040.art.cluster;
 
 
-import com.github.chen0040.art.ART1;
+import com.github.chen0040.art.ResonantAdapter1;
 import com.github.chen0040.data.frame.DataFrame;
 import com.github.chen0040.data.frame.DataRow;
 import com.github.chen0040.data.utils.transforms.Standardization;
@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by xschen on 21/8/15.
  */
 public class ART1Clustering {
-    private ART1 net;
+    private ResonantAdapter1 net;
     private final int initialNodeCount = 1;
 
     
@@ -43,7 +43,7 @@ public class ART1Clustering {
         int dimension = batch.row(0).toArray().length;
         inputNormalization = new Standardization(batch);
 
-        net=new ART1(dimension * 2, initialNodeCount);
+        net=new ResonantAdapter1(dimension * 2, initialNodeCount);
         net.setAlpha(alpha);
         net.setBeta(beta);
         net.setRho(rho0);
